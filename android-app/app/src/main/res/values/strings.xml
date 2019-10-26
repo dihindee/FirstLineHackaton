@@ -21,14 +21,13 @@
     <string name="lot9_text">Какая нибудь новость</string>
     <string name="lot10_author">@Times10</string>
     <string name="lot10_text">Какая нибудь новость</string>
-
-
-
-
+    <string name="title_activity_settings">settings</string>
+    <string name="title_activity_article">settings</string>
     <string-array name="categories">
         <item>Спорт</item>
         <item>IT</item>
         <item>Бизнес</item>
         <item>Политика</item>
     </string-array>
+
 </resources>
