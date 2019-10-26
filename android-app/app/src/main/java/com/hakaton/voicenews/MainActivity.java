@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -19,12 +20,19 @@ public class MainActivity extends AppCompatActivity {
     ArrayAdapter<String> adapter;
     ListView newsList;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
 //        requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
+
+        Spinner spinner = (Spinner) findViewById(R.id.spinner);
+        ArrayAdapter adapter = ArrayAdapter.createFromResource(this, R.array.categories, R.layout.main_spinner);
+        adapter.setDropDownViewResource(R.layout.spinner_dropout);
+        spinner.setAdapter(adapter);
+
         news.add("iPhone 7");
         news.add("Samsung Galaxy S7");
         news.add("Google Pixel");

@@ -9,7 +9,7 @@
     <RelativeLayout
         android:id="@+id/Header"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="77dp"
         android:background="#5F34AC"
         android:orientation="horizontal">
 
@@ -24,7 +24,9 @@
             android:layout_marginLeft="100dp"
             android:layout_marginTop="20dp"
             android:text="@string/app_name"
-            android:textSize="24sp" />
+            android:textColor="#E3FAC9"
+            android:textSize="30sp"
+            app:fontFamily="sans-serif-condensed" />
 
         <TextView
             android:id="@+id/button2"
@@ -34,8 +36,8 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
             android:layout_marginStart="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="24dp"
             android:drawableLeft="@drawable/ic_back" />
 
     </RelativeLayout>
