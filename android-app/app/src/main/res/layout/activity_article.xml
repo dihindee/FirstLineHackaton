@@ -7,9 +7,10 @@
     tools:context=".article">
 
     <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay"/>
+        android:theme="@style/AppTheme.AppBarOverlay" />
 
     <include layout="@layout/content_article" />
 
@@ -21,9 +22,7 @@
             android:id="@+id/textView3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="70dp"
+            android:layout_marginTop="100dp"
             android:padding="10dp"
             android:paddingLeft="10dp"
             android:paddingTop="10dp"
@@ -35,11 +34,11 @@
 
         <TextView
             android:id="@+id/textView4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="393dp"
+            android:layout_height="503dp"
             android:layout_margin="10dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
             android:padding="10dp"
             android:paddingLeft="10dp"
             android:paddingTop="10dp"
@@ -48,13 +47,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
-        <Button
-            android:id="@+id/button3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Назад"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

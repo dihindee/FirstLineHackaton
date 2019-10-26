@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_marginLeft="20dp"
+    android:layout_marginTop="0dp"
+    android:layout_marginRight="20dp"
+    android:layout_marginBottom="0dp"
+    android:clickable="true"
+    android:onClick="perform_action"
+    android:background="@drawable/main_eachlot_news"
+    android:padding="10dp"
+    android:id="@+id/lot1_text"
+    android:layout_width="match_parent"
+    android:layout_height="120dp"
+    android:paddingLeft="10dp"
+    android:paddingTop="5dp"
+    android:paddingRight="15dp"
+    android:textColor="#000000"
+    android:textSize="18sp" />

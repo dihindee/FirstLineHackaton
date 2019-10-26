@@ -7,6 +7,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -37,7 +38,7 @@ public class settings extends AppCompatActivity {
             }
         });
 
-        Button back = (Button)findViewById(R.id.button2);
+        TextView back = (TextView)findViewById(R.id.button2);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
