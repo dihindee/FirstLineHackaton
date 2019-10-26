@@ -1,3 +1,34 @@
 <resources>
     <string name="app_name">VoiceNews</string>
+    <string name="button_voice">s</string>
+    <string name="lot1_author">@Times1</string>
+    <string name="lot1_text">Какая нибудь новость</string>
+    <string name="lot2_author">@Times2</string>
+    <string name="lot2_text">Какая нибудь новость</string>
+    <string name="lot3_author">@Times3</string>
+    <string name="lot3_text">Какая нибудь новость</string>
+    <string name="lot4_author">@Times4</string>
+    <string name="lot4_text">Какая нибудь новость</string>
+    <string name="lot5_author">@Times5</string>
+    <string name="lot5_text">Какая нибудь новость</string>
+    <string name="lot6_author">@Times6</string>
+    <string name="lot6_text">Какая нибудь новость</string>
+    <string name="lot7_author">@Times7</string>
+    <string name="lot7_text">Какая нибудь новость</string>
+    <string name="lot8_author">@Times8</string>
+    <string name="lot8_text">Какая нибудь новость</string>
+    <string name="lot9_author">@Times9</string>
+    <string name="lot9_text">Какая нибудь новость</string>
+    <string name="lot10_author">@Times10</string>
+    <string name="lot10_text">Какая нибудь новость</string>
+
+
+
+
+    <string-array name="categories">
+        <item>Спорт</item>
+        <item>IT</item>
+        <item>Бизнес</item>
+        <item>Политика</item>
+    </string-array>
 </resources>
