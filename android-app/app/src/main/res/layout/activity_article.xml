@@ -71,14 +71,14 @@
             android:paddingTop="10dp"
             android:paddingRight="10dp"
             android:text="yfpdfybt cnfnerrrrrrrrrrrrermsdfsferffr"
-            android:textSize="30sp"
+            android:textSize="20sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/textView4"
-            android:layout_width="393dp"
-            android:layout_height="503dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"

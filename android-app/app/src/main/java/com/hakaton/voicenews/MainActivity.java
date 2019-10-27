@@ -1,12 +1,14 @@
 package com.hakaton.voicenews;
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -19,6 +21,10 @@ import androidx.core.content.ContextCompat;
 import com.icaksama.rapidsphinx.RapidPreparationListener;
 import com.icaksama.rapidsphinx.RapidSphinx;
 
+import org.json.JSONException;
+import org.json.simple.parser.ParseException;
+
+import java.io.IOException;
 import java.util.ArrayList;
 
 import edu.cmu.pocketsphinx.Config;
@@ -30,8 +36,11 @@ public class MainActivity extends AppCompatActivity {
 
     private TextView sett;
     ArrayList<String> news = new ArrayList();
+    String[] mas;
+    int index;
     ArrayAdapter<String> adapter;
     ListView newsList;
+
     private void requestPermission() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO)
                 != PackageManager.PERMISSION_GRANTED) {
@@ -54,21 +63,28 @@ public class MainActivity extends AppCompatActivity {
         adapter.setDropDownViewResource(R.layout.spinner_dropout);
         spinner.setAdapter(adapter);
 
-        news.add("iPhone 7");
-        news.add("Samsung Galaxy S7");
-        news.add("Google Pixel");
-        news.add("Huawei P10");
-        news.add("HP Elite z3");
-        news.add("iPhone 7");
-        news.add("Samsung Galaxy S7");
-        news.add("Google Pixel");
-        news.add("Huawei P10");
-        news.add("HP Elite z3");
+        try {
+            Information[] information;
+            information = ReadJSONExample.readInformationJSONFile(this);
+            mas = new String[information[0].getArticleInformation().length];
+            for (int i = 0; i < information[0].getArticleInformation().length; i++) {
+                news.add(information[0].getArticleInformation()[i].getTitle());
+                mas[i] = information[0].getArticleInformation()[i].getTitle();
+
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
         newsList = (ListView) findViewById(R.id.newsList);
         adapter = new ArrayAdapter<String>(this, R.layout.news_list_articles, news);
         newsList.setAdapter(adapter);
-        if(rapidSphinx==null) {
+
+        if (rapidSphinx == null) {
             rapidSphinx = new RapidSphinx(this);
 
             sr = new SpeechRecognize(this);
@@ -99,17 +115,32 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.voice).setOnClickListener(v -> sr.startRecognition());
     }
 
-    public void perform_action(View v)
-    {
+    public void perform_action(View v) {
 //        RelativeLayout tv= (RelativeLayout) findViewById(R.id.lot1);
-        System.out.println(v);
-        Intent intent = new Intent(".article");
-        RequestParser.setCurrentActivity("artice");
-        startActivity(intent);
+        try {
+            TextView t = (TextView) v;
+            Information[] information;
+            information = ReadJSONExample.readInformationJSONFile(this);
+            System.out.println(information[0].getArticleInformation()[0].getTitle());
+            for (int i = 0; i < news.size(); i++) {
+                if (mas[i] == t.getText()) {
+                    index = i;
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        Intent intent = new Intent(MainActivity.this, article.class);
+        intent.putExtra("id", String.valueOf(index));
+        startActivityForResult(intent, 0);
     }
 
     public void setting_action(View v) {
-        sett = (TextView)findViewById(R.id.settings);
+        sett = (TextView) findViewById(R.id.settings);
         Intent intent = new Intent(".settings");
         startActivity(intent);
     }

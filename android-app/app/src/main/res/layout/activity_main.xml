@@ -100,7 +100,9 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="637dp"
+        android:layout_below="@+id/Header"
         android:layout_alignParentBottom="true"
+        android:layout_marginTop="0dp"
         android:layout_marginBottom="0dp">
 
         <ScrollView
@@ -127,7 +129,8 @@
                     android:background="#A4D5D5D5"
                     android:choiceMode="multipleChoice"
                     android:divider="@android:color/transparent"
-                    android:dividerHeight="30.0sp">
+                    android:dividerHeight="30.0sp"
+                    >
 
                 </ListView>
 
@@ -147,9 +150,9 @@
                 android:layout_marginRight="32dp"
                 android:layout_marginBottom="32dp"
                 android:background="@drawable/button_voice_unpressed"
+                android:clickable="true"
                 android:drawableBottom="@drawable/ic_mic_turn"
                 android:gravity="center"
-                android:clickable="true"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
