@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ListView;
@@ -33,13 +34,16 @@ public class MainActivity extends AppCompatActivity {
     static RapidSphinx rapidSphinx;
     static private SphinxListener listener;
     static private SpeechRecognize sr;
+    private int currentSection;
+    boolean fl = false;
 
     private TextView sett;
     ArrayList<String> news = new ArrayList();
     String[] mas;
     int index;
-    ArrayAdapter<String> adapter;
+    ArrayAdapter<String> adapter1;
     ListView newsList;
+    AppCompatActivity new_this;
 
     private void requestPermission() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO)
@@ -55,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
         RequestParser.setCurrentActivity("MainActivity");
         RequestParser.mainScreen = this;
         getSupportActionBar().hide();
+
 //        requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
         requestPermission();
@@ -62,27 +67,47 @@ public class MainActivity extends AppCompatActivity {
         ArrayAdapter adapter = ArrayAdapter.createFromResource(this, R.array.categories, R.layout.main_spinner);
         adapter.setDropDownViewResource(R.layout.spinner_dropout);
         spinner.setAdapter(adapter);
-
-        try {
-            Information[] information;
-            information = ReadJSONExample.readInformationJSONFile(this);
-            mas = new String[information[0].getArticleInformation().length];
-            for (int i = 0; i < information[0].getArticleInformation().length; i++) {
-                news.add(information[0].getArticleInformation()[i].getTitle());
-                mas[i] = information[0].getArticleInformation()[i].getTitle();
-
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (JSONException e) {
-            e.printStackTrace();
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
         newsList = (ListView) findViewById(R.id.newsList);
-        adapter = new ArrayAdapter<String>(this, R.layout.news_list_articles, news);
-        newsList.setAdapter(adapter);
+        new_this = MainActivity.this;
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view,
+                                       int position, long id) {
+                // показываем позиция нажатого элемента
+                fl = true;
+                Toast.makeText(getBaseContext(), "Position = " + position, Toast.LENGTH_SHORT).show();
+                currentSection = position;
+                try {
+                    Information[] information;
+                    information = ReadJSONExample.readInformationJSONFile(new_this, currentSection);
+                    mas = new String[1000];
+                    news.clear();
+                    if (news.isEmpty()) System.out.println(fl);
+                    for (int i = 0; i < information[0].getArticleInformation().length; i++) {
+                        System.out.println(1);
+                        news.add(information[0].getArticleInformation()[i].getTitle());
+                        System.out.println(information[0].getArticleInformation()[i].getTitle());
+                        mas[i] = information[0].getArticleInformation()[i].getTitle();
+
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
+                adapter1 = new ArrayAdapter<String>(new_this, R.layout.news_list_articles, news);
+                System.out.println(newsList);
+                newsList.setAdapter(adapter1);
+                new_this = MainActivity.this;
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> arg0) {
+            }
+        });
 
         if (rapidSphinx == null) {
             rapidSphinx = new RapidSphinx(this);
@@ -119,8 +144,10 @@ public class MainActivity extends AppCompatActivity {
 //        RelativeLayout tv= (RelativeLayout) findViewById(R.id.lot1);
         try {
             TextView t = (TextView) v;
+
             Information[] information;
-            information = ReadJSONExample.readInformationJSONFile(this);
+            information = ReadJSONExample.readInformationJSONFile(this, currentSection);
+            System.out.println(currentSection);
             System.out.println(information[0].getArticleInformation()[0].getTitle());
             for (int i = 0; i < news.size(); i++) {
                 if (mas[i] == t.getText()) {
@@ -136,6 +163,7 @@ public class MainActivity extends AppCompatActivity {
         }
         Intent intent = new Intent(MainActivity.this, article.class);
         intent.putExtra("id", String.valueOf(index));
+        intent.putExtra("section", String.valueOf(currentSection));
         startActivityForResult(intent, 0);
     }
 

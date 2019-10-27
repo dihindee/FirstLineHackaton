@@ -17,9 +17,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class ReadJSONExample {
-    public static Information[] readInformationJSONFile(Context context) throws IOException, JSONException, ParseException {
-
+    public static Information[] readInformationJSONFile(Context context, int section) throws IOException, JSONException, ParseException {
         String jsonText1 = readText(context, R.raw.football);
+        switch (section) {
+            case 0: jsonText1 = readText(context, R.raw.football); break;
+            case 1: jsonText1 = readText(context, R.raw.it); break;
+        }
         JSONArray mJsonArray = new JSONArray(jsonText1);
         Information[] info = new Information[mJsonArray.length()];
         for (int i = 0; i < mJsonArray.length(); i++) {

@@ -31,6 +31,7 @@ public class article extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_article);
         int index = Integer.parseInt(getIntent().getStringExtra("id"));
+        int currentSection = Integer.parseInt(getIntent().getStringExtra("section"));
         RequestParser.articleScreen = this;
 
         TextView back = (TextView)findViewById(R.id.back);
@@ -40,7 +41,7 @@ public class article extends Activity {
         try {
 
             Information[] information;
-            information = ReadJSONExample.readInformationJSONFile(this);
+            information = ReadJSONExample.readInformationJSONFile(this, currentSection);
             outputText.setText(information[0].getArticleInformation()[index].getTitle());
             outputText1.setText(Html.fromHtml(information[0].getArticleInformation()[index].getText()+ "\n"+"Источник: "+"<a href="+"\""+information[0].getArticleInformation()[index].getUrl()+"\""+">Здесь</a>"));
             outputText1.setMovementMethod(LinkMovementMethod.getInstance());
