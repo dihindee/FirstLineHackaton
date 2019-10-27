@@ -1,33 +1,33 @@
 package com.hakaton.voicenews;
 
-import android.content.Context;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.util.Log;
-import android.view.View;
 import android.widget.Spinner;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Objects;
 
 public class RequestParser{
     static final String[] settings ={"настройки","открой настройки", "настройка", "settings", "сеттинги"};
-    static final String[] categoryRequest ={"покажи новости про","новости о","новости про","открой категорию","категория"};
+    static final String[] categoryRequest ={"покажи новости про","открой категорию","категория"};
     static final String[] categories = {"спорт","sport","it","это","айти","business","бизнес","политик"};
     static final String[] readHeaders = {"прочитай заголовки", "прочти заголовки", "читай заголовки"};
-    static final String[] openText = {"открой про","новость про", "открой новость про","открой новости", "открой"};
+    static final String[] openText = {"открой про","новость про","новости про", "открой новость про","открой новости", "открой"};
+    static final String[] openTextByIndex = {"открой","новость","открой","новости"};
     static final String[] readText = {"прочитай новость", "прочитай", "читай", "прочитай новости", "почитай новости", "почитай новость"};
     static final String[] stopReading = {"стой","подожди","постой","погоди","стоп","останови"};
     static final String[] continueReading = {"продолжай","давай дальше","читай дальше"};
     static final String[] restartReading = {"начни с начала","давай с начала","начни заново","давай заново"};
     static final String[] openSource = {"открой источник","источник новости","откуда новость"};
     static final String[] goBack = {"назад","давай назад","вернись назад"};
-    static final String[] exit = {"выход","выключи","вырубай","гаси","заткнись","заткнися"};
+    static final String[] exit = {"выход","выключи","вырубай","выключись","заткнись","выключайся"};
     static String currentActivity;
     static MainActivity mainScreen;
     static article articleScreen;
     static settings settingsScreen;
+    static MediaPlayer player;
     static void setCurrentActivity(String activity){
         currentActivity = activity;
     }
@@ -40,7 +40,7 @@ public class RequestParser{
                 if(currentActivity.equals("MainActivity"))
                     mainScreen.setting_action(null);
                 else if(currentActivity.equals("article"))
-                        articleScreen.setting_action(null);
+                    articleScreen.setting_action(null);
                 return;
             }
         }
@@ -77,16 +77,59 @@ public class RequestParser{
                     return;
                 }
             }
-//        if(hyp.matches(openText[0])){
+            for(int i =0; i <4; i+=2){
+                if(hyp.contains(openTextByIndex[i]) && hyp.contains(openTextByIndex[i+1])){
+                    hyp = hyp.replaceAll(openTextByIndex[i],"");
+                    hyp = hyp.replaceAll(openTextByIndex[i+1],"");
+                    Log.i("Parseresult ", "open :"+hyp);
+                    final String[] numeric = {"перв","втор","треть","четверт","пят","шес","се","вос","девят","десят","одиннадцат","двенадцат"};
+                    final String[] numericDigital = {"1","2","3","4","5","6","7","8","9","10","11","12"};
+                    for(int j = 0; j < numeric.length;j++){
+                        if(hyp.contains(numeric[j])||hyp.contains(numericDigital[j])){
+                            Log.i("ParseResult ", "best match: " + mainScreen.news.get(j));
+                            return;
+                        }
+                    }
+                }
+            }
+
+//        if(hyp.matches(openTextByIndex[0])){
 //            hyp = hyp.replaceAll(openText[0].split(" ")[0]," ");
-//            hyp = hyp.replaceAll(openText[0].split(" ")[1]," ");
+//            hyp = hyp.replaceAll(openText[0].split(" ")[2]," ");
 //            Log.i("Parseresult ", "open :"+hyp);
 //        }
             for (String str : openText) {//TODO
                 if (hyp.contains(str)) {
                     //TODO Text selection
                     hyp = hyp.replaceAll(str, "");
+                    String[] req_items = hyp.split(" ");
+                    for(int i=0; i<req_items.length;i++){
+                        if(req_items[i].isEmpty())req_items[i] = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAa";
+                    }
+                    Log.i("ParseResult","req items: "+Arrays.toString(req_items));
+                    String[][] header_items = new String[mainScreen.news.size()][];
+                    int[] match_count = new int[header_items.length];
+                    Log.i("ParseResult",Arrays.toString(mainScreen.news.toArray()));
+                    for(int i = 0;i < mainScreen.news.size(); i++){
+                        header_items[i] = Objects.requireNonNull(mainScreen.news.get(i)).toLowerCase().split(" ");
+                        Log.i("ParseResult","Header items: "+Arrays.toString(header_items[i]));
+                        for(String req: req_items){
+                            for(String header: header_items[i]){
+                                if(header.contains(req.substring(0,req.length()-2)))
+                                    match_count[i]++;
+                            }
+                        }
+                    }
+                    int max=0, maxIndex=0;
+                    for(int i=0; i < match_count.length; i++){
+                        if(match_count[i]>max){
+                            max = match_count[i];
+                            maxIndex = i;
+                        }
+                    }
+                    Log.i("ParseResult","matches: "+ Arrays.toString(match_count));
                     Log.i("ParseResult ", "open :" + hyp);
+                    Log.i("ParseResult ", "best match: " + mainScreen.news.get(maxIndex));
                     return;
                 }
             }
@@ -95,6 +138,10 @@ public class RequestParser{
             for (String str : readText) {//TODO
                 if (hyp.contains(str)) {
                     Log.i("ParseResult ", "read text");
+                    if(player!=null){
+                        player.stop();
+                    }
+//                    player = MediaPlayer.create();
                     return;
                 }
             }
@@ -130,7 +177,7 @@ public class RequestParser{
                 if(currentActivity.equals("MainActivity"))
                     mainScreen.onBackPressed();
                 else if(currentActivity.equals("article"))
-                        articleScreen.onBackPressed();
+                    articleScreen.onBackPressed();
                 else settingsScreen.onBackPressed();
                 return;
             }

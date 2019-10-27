@@ -17,7 +17,7 @@ public class MyRecognitionListener implements RecognitionListener {
 
     MyRecognitionListener(Context context){
         this.context = context;
-        sphinx = ((MainActivity)context).rapidSphinx;
+        sphinx = MainActivity.rapidSphinx;
     }
 
     @Override
