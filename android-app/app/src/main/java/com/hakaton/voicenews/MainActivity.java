@@ -24,10 +24,9 @@ import java.util.ArrayList;
 import edu.cmu.pocketsphinx.Config;
 
 public class MainActivity extends AppCompatActivity {
-    RapidSphinx rapidSphinx;
-    private SphinxListener listener;
-    private SpeechRecognize sr;
-    TextView display;
+    static RapidSphinx rapidSphinx;
+    static private SphinxListener listener;
+    static private SpeechRecognize sr;
 
     private TextView sett;
     ArrayList<String> news = new ArrayList();
@@ -44,6 +43,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        RequestParser.setCurrentActivity("MainActivity");
+        RequestParser.mainScreen = this;
         getSupportActionBar().hide();
 //        requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
@@ -67,32 +68,35 @@ public class MainActivity extends AppCompatActivity {
         newsList = (ListView) findViewById(R.id.newsList);
         adapter = new ArrayAdapter<String>(this, R.layout.news_list_articles, news);
         newsList.setAdapter(adapter);
-        rapidSphinx = new RapidSphinx(this);
-        sr = new SpeechRecognize(this);
+        if(rapidSphinx==null) {
+            rapidSphinx = new RapidSphinx(this);
+
+            sr = new SpeechRecognize(this);
+
+            listener = new SphinxListener(rapidSphinx, sr);
+            rapidSphinx.addListener(listener);
+            ProgressDialog dialog = ProgressDialog.show(MainActivity.this, "",
+                    "Preparing data. Please wait...", true);
+            rapidSphinx.prepareRapidSphinx(new RapidPreparationListener() {
+                @Override
+                public void rapidPreExecute(Config config) {
+                    rapidSphinx.setSilentToDetect(2000);
+                    rapidSphinx.setVadThreshold(1);
+                    rapidSphinx.setTimeOutAfterSpeech(10000);
+                    config.setBoolean("-backtrace", true);
+                }
+
+                @Override
+                public void rapidPostExecute(boolean isSuccess) {
+                    Toast.makeText(getApplicationContext(), "RapidSphinx ready!", Toast.LENGTH_SHORT).show();
+                    rapidSphinx.updateVocabulary("igor", new String[]{}, () -> {
+                        dialog.dismiss();
+                        rapidSphinx.startRapidSphinx(10000);
+                    });
+                }
+            });
+        }
         findViewById(R.id.voice).setOnClickListener(v -> sr.startRecognition());
-        listener = new SphinxListener(rapidSphinx,sr);
-        rapidSphinx.addListener(listener);
-        ProgressDialog dialog = ProgressDialog.show(MainActivity.this, "",
-                "Preparing data. Please wait...", true);
-        rapidSphinx.prepareRapidSphinx(new RapidPreparationListener() {
-            @Override
-            public void rapidPreExecute(Config config) {
-                rapidSphinx.setSilentToDetect(2000);
-                rapidSphinx.setVadThreshold(1);
-                rapidSphinx.setTimeOutAfterSpeech(10000);
-                config.setBoolean("-backtrace", true);
-            }
-
-            @Override
-            public void rapidPostExecute(boolean isSuccess) {
-                Toast.makeText(getApplicationContext(),"RapidSphinx ready!",Toast.LENGTH_SHORT).show();
-                rapidSphinx.updateVocabulary("igor", new String[]{}, ()->{
-                    dialog.dismiss();
-                    rapidSphinx.startRapidSphinx(10000);});
-            }
-        });
-
-
     }
 
     public void perform_action(View v)
@@ -100,6 +104,7 @@ public class MainActivity extends AppCompatActivity {
 //        RelativeLayout tv= (RelativeLayout) findViewById(R.id.lot1);
         System.out.println(v);
         Intent intent = new Intent(".article");
+        RequestParser.setCurrentActivity("artice");
         startActivity(intent);
     }
 

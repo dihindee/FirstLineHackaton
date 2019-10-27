@@ -19,7 +19,8 @@ public class settings extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
-
+        RequestParser.setCurrentActivity("settings");
+        RequestParser.settingsScreen = this;
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, font);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
@@ -39,19 +40,7 @@ public class settings extends AppCompatActivity {
         });
 
         TextView back = (TextView)findViewById(R.id.button2);
-        back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try {
-                    Intent intent = new Intent(settings.this, MainActivity.class);
-                    startActivity(intent);
-                    finish();
-                }
-                catch (Exception e) {
-
-                }
-            }
-        });
+        back.setOnClickListener(v -> onBackPressed());
     }
 
 

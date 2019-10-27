@@ -14,23 +14,12 @@ public class article extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_article);
-
+        RequestParser.articleScreen = this;
         TextView back = (TextView)findViewById(R.id.back);
-        back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try {
-                    Intent intent = new Intent(article.this, MainActivity.class);
-                    startActivity(intent);
-                    finish();
-                }
-                catch (Exception e) {
-
-                }
-            }
-        });
+        back.setOnClickListener(v -> onBackPressed());
 
     }
+
     public void perform_action(View v)
     {
 //        RelativeLayout tv= (RelativeLayout) findViewById(R.id.lot1);
@@ -44,5 +33,9 @@ public class article extends AppCompatActivity {
         Intent intent = new Intent(".settings");
         startActivity(intent);
     }
-
+    @Override
+    public void onBackPressed(){
+        super.onBackPressed();
+        RequestParser.setCurrentActivity("MainActivity");
+    }
 }
