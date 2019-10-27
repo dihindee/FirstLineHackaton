@@ -19,7 +19,7 @@ public class Information {
 
         sb.append("\n url:" + this.url);
         if (this.articleInformation != null) {
-            sb.append("\n address:" + this.articleInformation.toString());
+            sb.append("\n articleInformation:" + this.articleInformation.toString());
         }
         return sb.toString();
     }
