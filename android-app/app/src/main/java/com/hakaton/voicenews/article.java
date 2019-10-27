@@ -2,7 +2,15 @@ package com.hakaton.voicenews;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.text.Html;
+import android.text.Spannable;
+import android.text.SpannableStringBuilder;
+import android.text.method.LinkMovementMethod;
+import android.text.style.ClickableSpan;
+import android.text.style.URLSpan;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -34,7 +42,9 @@ public class article extends Activity {
             Information[] information;
             information = ReadJSONExample.readInformationJSONFile(this);
             outputText.setText(information[0].getArticleInformation()[index].getTitle());
-            outputText1.setText(information[0].getArticleInformation()[index].getText());
+            outputText1.setText(Html.fromHtml(information[0].getArticleInformation()[index].getText()+ "\n"+"Источник: "+"<a href="+"\""+information[0].getArticleInformation()[index].getUrl()+"\""+">Здесь</a>"));
+            outputText1.setMovementMethod(LinkMovementMethod.getInstance());
+
         } catch (IOException e) {
             e.printStackTrace();
         } catch (JSONException e) {

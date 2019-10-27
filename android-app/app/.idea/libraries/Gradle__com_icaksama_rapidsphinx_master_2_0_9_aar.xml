@@ -1,0 +1,15 @@
+<component name="libraryTable">
+  <library name="Gradle: com.icaksama.rapidsphinx:master:2.0.9@aar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/acba6cd7a07f7611182ff827e065c5ed/jetified-master-2.0.9/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/acba6cd7a07f7611182ff827e065c5ed/jetified-master-2.0.9/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/acba6cd7a07f7611182ff827e065c5ed/jetified-master-2.0.9/jars/libs/pocketsphinx.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.icaksama.rapidsphinx/master/2.0.9/e7c413050e6f3dfc792d1b58b7c86a939749db9c/master-2.0.9-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.icaksama.rapidsphinx/master/2.0.9/bdc80a84020aebd9b3b3417437c22482ee456d40/master-2.0.9-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

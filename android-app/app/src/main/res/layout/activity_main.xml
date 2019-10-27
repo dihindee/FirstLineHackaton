@@ -80,7 +80,7 @@
                     android:gravity="center"
                     android:scrollbarAlwaysDrawHorizontalTrack="false"
                     android:spinnerMode="dropdown"
-                    android:textSize="20dp" />
+                    android:textSize="@dimen/article_text" />
 
                 <ImageView
                     android:layout_width="wrap_content"
