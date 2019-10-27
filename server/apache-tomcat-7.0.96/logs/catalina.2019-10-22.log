@@ -1,0 +1,94 @@
+окт 22, 2019 9:32:17 PM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Server version:        Apache Tomcat/7.0.96
+окт 22, 2019 9:32:17 PM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Server built:          Jul 24 2019 13:00:10 UTC
+окт 22, 2019 9:32:17 PM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Server number:         7.0.96.0
+окт 22, 2019 9:32:17 PM org.apache.catalina.startup.VersionLoggerListener log
+INFO: OS Name:               Mac OS X
+окт 22, 2019 9:32:17 PM org.apache.catalina.startup.VersionLoggerListener log
+INFO: OS Version:            10.15
+окт 22, 2019 9:32:17 PM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Architecture:          x86_64
+окт 22, 2019 9:32:17 PM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Java Home:             /Library/Java/JavaVirtualMachines/jdk1.8.0_131.jdk/Contents/Home/jre
+окт 22, 2019 9:32:17 PM org.apache.catalina.startup.VersionLoggerListener log
+INFO: JVM Version:           1.8.0_131-b11
+окт 22, 2019 9:32:17 PM org.apache.catalina.startup.VersionLoggerListener log
+INFO: JVM Vendor:            Oracle Corporation
+окт 22, 2019 9:32:17 PM org.apache.catalina.startup.VersionLoggerListener log
+INFO: CATALINA_BASE:         /Users/user/Downloads/apache-tomcat-7.0.96
+окт 22, 2019 9:32:17 PM org.apache.catalina.startup.VersionLoggerListener log
+INFO: CATALINA_HOME:         /Users/user/Downloads/apache-tomcat-7.0.96
+окт 22, 2019 9:32:17 PM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Command line argument: -Djava.util.logging.config.file=/Users/user/Downloads/apache-tomcat-7.0.96/conf/logging.properties
+окт 22, 2019 9:32:17 PM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Command line argument: -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager
+окт 22, 2019 9:32:17 PM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Command line argument: -Djdk.tls.ephemeralDHKeySize=2048
+окт 22, 2019 9:32:17 PM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Command line argument: -Dignore.endorsed.dirs=
+окт 22, 2019 9:32:17 PM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Command line argument: -Dcatalina.base=/Users/user/Downloads/apache-tomcat-7.0.96
+окт 22, 2019 9:32:17 PM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Command line argument: -Dcatalina.home=/Users/user/Downloads/apache-tomcat-7.0.96
+окт 22, 2019 9:32:17 PM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Command line argument: -Djava.io.tmpdir=/Users/user/Downloads/apache-tomcat-7.0.96/temp
+окт 22, 2019 9:32:17 PM org.apache.catalina.core.AprLifecycleListener lifecycleEvent
+INFO: The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: /Users/user/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:.
+окт 22, 2019 9:32:17 PM org.apache.coyote.AbstractProtocol init
+INFO: Initializing ProtocolHandler ["http-bio-8080"]
+окт 22, 2019 9:32:17 PM org.apache.coyote.AbstractProtocol init
+INFO: Initializing ProtocolHandler ["ajp-bio-8009"]
+окт 22, 2019 9:32:17 PM org.apache.catalina.startup.Catalina load
+INFO: Initialization processed in 782 ms
+окт 22, 2019 9:32:17 PM org.apache.catalina.core.StandardService startInternal
+INFO: Starting service Catalina
+окт 22, 2019 9:32:17 PM org.apache.catalina.core.StandardEngine startInternal
+INFO: Starting Servlet Engine: Apache Tomcat/7.0.96
+окт 22, 2019 9:32:18 PM org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deploying web application directory /Users/user/Downloads/apache-tomcat-7.0.96/webapps/1
+окт 22, 2019 9:32:18 PM org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deployment of web application directory /Users/user/Downloads/apache-tomcat-7.0.96/webapps/1 has finished in 304 ms
+окт 22, 2019 9:32:18 PM org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deploying web application directory /Users/user/Downloads/apache-tomcat-7.0.96/webapps/docs
+окт 22, 2019 9:32:18 PM org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deployment of web application directory /Users/user/Downloads/apache-tomcat-7.0.96/webapps/docs has finished in 51 ms
+окт 22, 2019 9:32:18 PM org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deploying web application directory /Users/user/Downloads/apache-tomcat-7.0.96/webapps/manager
+окт 22, 2019 9:32:18 PM org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deployment of web application directory /Users/user/Downloads/apache-tomcat-7.0.96/webapps/manager has finished in 58 ms
+окт 22, 2019 9:32:18 PM org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deploying web application directory /Users/user/Downloads/apache-tomcat-7.0.96/webapps/examples
+окт 22, 2019 9:32:18 PM org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deployment of web application directory /Users/user/Downloads/apache-tomcat-7.0.96/webapps/examples has finished in 530 ms
+окт 22, 2019 9:32:18 PM org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deploying web application directory /Users/user/Downloads/apache-tomcat-7.0.96/webapps/ROOT
+окт 22, 2019 9:32:18 PM org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deployment of web application directory /Users/user/Downloads/apache-tomcat-7.0.96/webapps/ROOT has finished in 36 ms
+окт 22, 2019 9:32:18 PM org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deploying web application directory /Users/user/Downloads/apache-tomcat-7.0.96/webapps/host-manager
+окт 22, 2019 9:32:19 PM org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deployment of web application directory /Users/user/Downloads/apache-tomcat-7.0.96/webapps/host-manager has finished in 48 ms
+окт 22, 2019 9:32:19 PM org.apache.coyote.AbstractProtocol start
+INFO: Starting ProtocolHandler ["http-bio-8080"]
+окт 22, 2019 9:32:19 PM org.apache.coyote.AbstractProtocol start
+INFO: Starting ProtocolHandler ["ajp-bio-8009"]
+окт 22, 2019 9:32:19 PM org.apache.catalina.startup.Catalina start
+INFO: Server startup in 1100 ms
+окт 22, 2019 9:40:21 PM org.apache.catalina.core.StandardServer await
+INFO: A valid shutdown command was received via the shutdown port. Stopping the Server instance.
+окт 22, 2019 9:40:21 PM org.apache.coyote.AbstractProtocol pause
+INFO: Pausing ProtocolHandler ["http-bio-8080"]
+окт 22, 2019 9:40:21 PM org.apache.coyote.AbstractProtocol pause
+INFO: Pausing ProtocolHandler ["ajp-bio-8009"]
+окт 22, 2019 9:40:21 PM org.apache.catalina.core.StandardService stopInternal
+INFO: Stopping service Catalina
+окт 22, 2019 9:40:21 PM org.apache.coyote.AbstractProtocol stop
+INFO: Stopping ProtocolHandler ["http-bio-8080"]
+окт 22, 2019 9:40:21 PM org.apache.coyote.AbstractProtocol stop
+INFO: Stopping ProtocolHandler ["ajp-bio-8009"]
+окт 22, 2019 9:40:21 PM org.apache.coyote.AbstractProtocol destroy
+INFO: Destroying ProtocolHandler ["http-bio-8080"]
+окт 22, 2019 9:40:21 PM org.apache.coyote.AbstractProtocol destroy
+INFO: Destroying ProtocolHandler ["ajp-bio-8009"]
