@@ -6,6 +6,12 @@
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
           <element id="module-output" name="server" />
+          <element id="module-output" name="parsing" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="json-simple-1.1" />
+          <element id="library" level="project" name="jsoup-1.12.1" />
+          <element id="library" level="application" name="Python 3.7 (server) interpreter library" />
         </element>
       </element>
     </root>

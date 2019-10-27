@@ -7,28 +7,38 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
+import java.io.*;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 
 
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
 public final class ListNews {
-    private static final String FILENAMEFOOTBALL = "./resource/football.json";
-    private static final String FILENAMEBUSINESS = "./resource/business.json";
-    private static final String FILENAMEPOLITICS = "./resource/politics.json";
-    private static final String FILENAMEIT = "./resource/it.json";
+    private static final String FILENAMEFOOTBALL = "/Users/user/Desktop/server/resource/football.json";
+    private static final String FILENAMEBUSINESS = "/Users/user/Desktop/server/resource/business.json";
+    private static final String FILENAMEPOLITICS = "/Users/user/Desktop/server/resource//politics.json";
+    private static final String FILENAMEIT = "/Users/user/Desktop/server/resource/it.json";
     private static final String FILEPY = "./src/tts.py";
     private static final String FILEAUDIO = "./web/resource/";
     static private Map<String, ArrayList<String>> adress;
 
+    private static void deleteAllFilesFolder(String path,ArrayList<JSONObject> deleteFile) {
+        for (File myFile : new File(path).listFiles()){
+             if (myFile.isFile()) {
+                deleteFile.forEach(del->{
+                    if(del.get("urlAudio").toString().equals(myFile.getName()) || del.get("urlTitleAudio").toString().equals(myFile.getName()))
+                        myFile.delete();
+                });
+
+             }
+        }
+
+    }
+
     static private void init() {
-        adress=new HashMap<>();
+        adress = new HashMap<>();
         ArrayList<String> params = new ArrayList<>();
         params.add("card  card--small card--horizontal");
         params.add("all-body js-mediator-article");
@@ -56,7 +66,7 @@ public final class ListNews {
             JSONObject jsonObject = (JSONObject) elm;
             String url = jsonObject.get("url").toString();
             try {
-                jsonObject.put("urlNews", parsing(url, params));
+                jsonObject.put("urlNews", parsing(url, params, (JSONArray) jsonObject.get("urlNews")));
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -68,46 +78,59 @@ public final class ListNews {
 
     }
 
-    static public ArrayList<JSONObject> parsing(String mainurl, ArrayList<String> params) throws IOException {
+    static public ArrayList<JSONObject> parsing(String mainurl, ArrayList<String> params, JSONArray jsonArray) throws IOException {
         ArrayList<JSONObject> list = new ArrayList<>();
+        ArrayList<JSONObject> deleteFile = new ArrayList<>(jsonArray);
         Document document = Jsoup.connect(mainurl).get();
         Elements elements = document.getElementsByAttributeValue("class", params.get(0));
+
         elements.forEach(element -> {
+            int fl = 0;
+            JSONObject object = new JSONObject();
             Element aElement = element.child(0);
             String url = aElement.attr("href");
-            Elements elementText = null;
-            try {
-                Document documentText = Jsoup.connect(url).get();
-                elementText = documentText.getElementsByAttributeValue("class", params.get(1));
-            } catch (IOException e) {
-                e.printStackTrace();
+            for (Object obj : jsonArray) {
+                if (((JSONObject) obj).get("url").toString().equals(url)) {
+                    object = (JSONObject) obj;
+                    deleteFile.remove(obj);
+                    fl = 1;
+                }
             }
+            ;
+            if (fl == 0) {
+                Elements elementText = null;
+                try {
+                    Document documentText = Jsoup.connect(url).get();
+                    elementText = documentText.getElementsByAttributeValue("class", params.get(1));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
 
-            String title = element.text();
-            JSONObject object = new JSONObject();
-            object.put("url", url);
-            object.put("title", title);
-            object.put("Text", elementText.text());
-            object.put("urlTitleAudio", "title" + title.hashCode() + ".mp3");
-            object.put("urlAudio", title.hashCode() + ".mp3");
-            try {
-                Process p = Runtime.getRuntime().exec("python3 " + FILEPY + " " + title + " " + FILEAUDIO + "title" + title.hashCode() + ".mp3");
-                Process p1 = Runtime.getRuntime().exec("python3 " + FILEPY + " " + elementText.text() + " " + FILEAUDIO + title.hashCode() + ".mp3");
-            } catch (Exception e) {
-                e.printStackTrace();
+                String title = element.text();
+
+                object.put("url", url);
+                object.put("title", title);
+                object.put("Text", elementText.text());
+                object.put("urlTitleAudio", "title" + title.hashCode() + ".mp3");
+                object.put("urlAudio", title.hashCode() + ".mp3");
+                try {
+                    Process p = Runtime.getRuntime().exec("python3 " + FILEPY + " " + title + " " + FILEAUDIO + "title" + title.hashCode() + ".mp3");
+                    Process p1 = Runtime.getRuntime().exec("python3 " + FILEPY + " " + elementText.text() + " " + FILEAUDIO + title.hashCode() + ".mp3");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
-
             list.add(object);
         });
+        deleteAllFilesFolder(FILEAUDIO,deleteFile);
         return list;
     }
 
-    public static void main(String[] args) throws IOException, ParseException {
-       init();
-       // updateJson(FILENAMEIT,adress.get(FILENAMEIT));
-        adress.forEach((adress,param)->{
+    public static void UpdateResourse() {
+        init();
+        adress.forEach((adress, param) -> {
             try {
-                updateJson(adress,param);
+                updateJson(adress, param);
             } catch (IOException e) {
                 e.printStackTrace();
             } catch (ParseException e) {
@@ -115,25 +138,5 @@ public final class ListNews {
             }
         });
 
-//        Document document = Jsoup.connect("https://www.forbes.ru/new").get();
-//        Elements elements = document.getElementsByAttributeValue("class","card  card--small card--horizontal");
-//        System.out.println(elements);
-//        elements.forEach(element -> {
-//            Element aElement = element.child(0);
-//            String url = aElement.attr("href");
-//
-//           Elements elementText = null;
-//            try {
-//                Document documentText = Jsoup.connect(url).get();
-//                elementText = documentText.getElementsByAttributeValue("class","all-body js-mediator-article");
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//            System.out.println(url);
-//            String title = element.text();
-//            System.out.println(element.text());
-//            System.out.println(elementText.text());
-//
-//        });
     }
 }

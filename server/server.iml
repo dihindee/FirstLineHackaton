@@ -24,7 +24,6 @@
         </webroots>
         <sourceRoots>
           <root url="file://$MODULE_DIR$/src" />
-          <root url="file://$MODULE_DIR$/resourse" />
         </sourceRoots>
       </configuration>
     </facet>
@@ -38,7 +37,6 @@
         </webroots>
         <sourceRoots>
           <root url="file://$MODULE_DIR$/src" />
-          <root url="file://$MODULE_DIR$/resourse" />
         </sourceRoots>
       </configuration>
     </facet>
@@ -52,7 +50,6 @@
         </webroots>
         <sourceRoots>
           <root url="file://$MODULE_DIR$/src" />
-          <root url="file://$MODULE_DIR$/resourse" />
         </sourceRoots>
       </configuration>
     </facet>
@@ -66,7 +63,6 @@
         </webroots>
         <sourceRoots>
           <root url="file://$MODULE_DIR$/src" />
-          <root url="file://$MODULE_DIR$/resourse" />
         </sourceRoots>
       </configuration>
     </facet>
@@ -80,7 +76,6 @@
         </webroots>
         <sourceRoots>
           <root url="file://$MODULE_DIR$/src" />
-          <root url="file://$MODULE_DIR$/resourse" />
         </sourceRoots>
       </configuration>
     </facet>
@@ -94,7 +89,6 @@
         </webroots>
         <sourceRoots>
           <root url="file://$MODULE_DIR$/src" />
-          <root url="file://$MODULE_DIR$/resourse" />
         </sourceRoots>
       </configuration>
     </facet>
@@ -108,7 +102,6 @@
         </webroots>
         <sourceRoots>
           <root url="file://$MODULE_DIR$/src" />
-          <root url="file://$MODULE_DIR$/resourse" />
         </sourceRoots>
       </configuration>
     </facet>
@@ -122,7 +115,6 @@
         </webroots>
         <sourceRoots>
           <root url="file://$MODULE_DIR$/src" />
-          <root url="file://$MODULE_DIR$/resourse" />
         </sourceRoots>
       </configuration>
     </facet>
@@ -141,7 +133,7 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" scope="PROVIDED" name="Tomcat 7.0.96" level="application_server_libraries" />
     <orderEntry type="library" name="servlet-api" level="project" />
-    <orderEntry type="library" name="json-simple-1.1" level="project" />
     <orderEntry type="library" name="Python 3.7 (server) interpreter library" level="application" />
+    <orderEntry type="module" module-name="parsing" />
   </component>
 </module>
